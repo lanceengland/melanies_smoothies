@@ -2,6 +2,7 @@
 import streamlit as st
 from snowflake.snowpark.functions import col
 import requests
+import Pandas
 
 # Write directly to the app
 st.title("Example Streamlit App :cup_with_straw:")
@@ -15,7 +16,8 @@ st.write(
 
 cnk = st.connection("snowflake")
 session = cnk.session()
-my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT_NAME"))
+my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT_NAME"), col("SEARCH_ON"))
+st.stop()
 
 ingredients_list = st.multiselect(
     "Select some items",
